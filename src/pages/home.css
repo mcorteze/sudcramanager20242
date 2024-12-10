@@ -1,0 +1,16 @@
+.home-page-full{
+    height: 100%;
+}
+
+.pagination-container {
+    display: flex;
+    justify-content: right; /* Centra el paginador */
+    margin-top: 16px;
+  }
+  
+  .chart-container {
+    width: 100%;
+    height: 500px; /* Mantén el alto fijo si es necesario */
+    margin-top: 20px;
+  }
+  

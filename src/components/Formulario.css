@@ -1,0 +1,24 @@
+  .formulario-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+  }
+  
+  .info-button {
+    display: flex !important;
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+    height: 22px !important;
+    width: 22px !important;
+    padding: 0 !important;
+    border-radius: 50%;
+    margin-inline: 2px;
+  }
+
+  @media (max-width: 600px) {
+    .formulario-container {
+      flex-direction: column;
+    }
+  }
+  

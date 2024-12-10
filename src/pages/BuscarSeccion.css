@@ -1,0 +1,18 @@
+.titulo {
+    font-weight: bold; /* O cualquier otro estilo que prefieras */
+    font-size: 12px;
+    color: #4d4d4d;
+    margin: 0 !important;
+  }
+  
+.marco-grid {
+    margin: 0 20px 24px 0px;
+    max-width: 700px;
+    padding: 20px;
+    border: 1px solid rgb(209, 209, 209);
+}
+
+.buscar-seccion-table1 {
+  margin: 0 20px 24px 0px;
+  max-width: 620px;
+}

@@ -1,0 +1,294 @@
+
+/* seccion de iconos */
+.menu-icons-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.menu-icons-container .menu-icon {
+    border-radius: 50%;
+    font-size: 16px !important;
+    margin-left: 6px;
+    width: 29px;
+    height: 29px;
+}
+
+.menu-icons-container .menu-icon svg{
+    width: 1.1em;
+    height: 1.1em;
+}
+
+/* css propio para segmentación */
+.segmen-flex-cont {
+    display: flex;           /* Usar diseño flexible */
+    flex-direction: row;     /* Organizar elementos en fila */
+    justify-content: space-between;
+    flex-wrap: wrap;         /* Permitir que el contenido salte a la siguiente línea */
+    gap: 0px;               /* Espaciado entre elementos */
+    width: 100%;             /* Utilizar todo el ancho disponible */
+    max-width: 310px;        /* Limitar el ancho máximo a 350px */
+    box-sizing: border-box;  /* Incluir bordes y relleno en el ancho y alto */
+}
+.segmen-cont {
+    width: 150px;        /* Ancho fijo */
+    height: 300px;       /* Altura fija */
+    overflow-y: scroll;  /* Habilitar scroll vertical si el contenido es mayor */
+    overflow-x: hidden;  /* Evitar scroll horizontal */
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    -webkit-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+    -moz-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+    box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+}
+
+.segmen-cont {
+    overflow-y: scroll; /* Permitir desplazamiento vertical */
+    scrollbar-width: none; /* Firefox: Oculta la barra de desplazamiento */
+    -ms-overflow-style: none; /* IE y Edge: Oculta la barra de desplazamiento */
+}
+
+.segmen-cont::-webkit-scrollbar {
+    display: none; /* Chrome, Safari y Opera: Oculta la barra de desplazamiento */
+}
+
+
+.segmen-cont .ant-segmented {
+    padding: 0px;
+}
+.segmen-cont .ant-segmented-group {
+    width: 150px !important;
+    
+}
+.segmen-cont .ant-segmented-item-label {
+    text-align: left;
+    font-size: 10px;
+    padding-inline: 4px;
+}
+/* --------------------------- */
+
+/* Estilos para pantallas menores a 5000px */
+@media (max-width: 5000px) {
+    .segmen-cont {
+        height: 340px;       /* Altura fija */
+    }
+    .segmen-cont .ant-segmented-item-label {
+        font-size: 12px;
+    }
+    .parent {
+        display: grid;
+        grid-template-columns: repeat(15, 1fr);
+        grid-template-rows: repeat(18, 1fr);
+        gap: 8px;
+        height: 780px !important;
+        position: relative;
+    }
+    
+    .div1 {
+        grid-column: span 3 / span 3;
+        grid-row: span 18 / span 18;
+    }
+    
+    .div2 {
+        grid-column: span 3 / span 3;
+        grid-row: span 6 / span 6;
+        grid-column-start: 4;
+        display: flex; /* Usar flexbox para alinear el contenido */
+        justify-content: center; /* Centrar horizontalmente */
+        align-items: center; /* Centrar verticalmente */
+        overflow: hidden; /* Ocultar contenido desbordado */
+        width: 100%; /* Ajustarse al ancho disponible */
+        height: 100%; /* Ajustarse al alto disponible */
+        padding: 40px !important;
+        -webkit-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        -moz-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+    }
+    
+    .div3 {
+        grid-column: span 3 / span 3;
+        grid-row: span 10 / span 10;
+        grid-column-start: 4;
+        grid-row-start: 7;
+        display: flex; /* Mantén flexbox */
+        justify-content: center; /* Centra horizontalmente */
+        align-items:baseline; /* Centra verticalmente */
+        overflow: hidden; /* Oculta contenido desbordado */
+        width: 100%; /* Ajusta al ancho disponible */
+        height: 100%; /* Agrega ajuste dinámico */
+        padding: 0px; /* Evita el desbordamiento del contenido */
+        position: relative; /* Permite ajustes relativos */
+        -webkit-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        -moz-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+    }
+    
+    .div4 {
+        grid-column: span 9 / span 9;
+        grid-row: span 6 / span 6;
+        grid-column-start: 7;
+        grid-row-start: 1;
+        display: flex; /* Mantén flexbox */
+        justify-content: center; /* Centra horizontalmente */
+        align-items:baseline; /* Centra verticalmente */
+        overflow: hidden; /* Oculta contenido desbordado */
+        width: 100%; /* Ajusta al ancho disponible */
+        height: 100%; /* Agrega ajuste dinámico */
+        padding: 0px; /* Evita el desbordamiento del contenido */
+        position: relative; /* Permite ajustes relativos */
+        -webkit-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        -moz-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+    }
+    
+    
+    .div5 {
+        grid-column: span 9 / span 9;
+        grid-row: span 6 / span 6;
+        grid-column-start: 7;
+        grid-row-start: 7;
+        display: flex; /* Mantén flexbox */
+        justify-content: center; /* Centra horizontalmente */
+        align-items:baseline; /* Centra verticalmente */
+        overflow: hidden; /* Oculta contenido desbordado */
+        width: 100%; /* Ajusta al ancho disponible */
+        height: 100%; /* Agrega ajuste dinámico */
+        padding: 0px; /* Evita el desbordamiento del contenido */
+        position: relative; /* Permite ajustes relativos */
+        -webkit-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        -moz-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+    }
+    
+    .div6 {
+        grid-column: span 9 / span 9;
+        grid-row: span 6 / span 6;
+        grid-column-start: 7;
+        grid-row-start: 13;
+        display: flex; /* Mantén flexbox */
+        justify-content: center; /* Centra horizontalmente */
+        align-items:baseline; /* Centra verticalmente */
+        overflow: hidden; /* Oculta contenido desbordado */
+        width: 100%; /* Ajusta al ancho disponible */
+        height: 100%; /* Agrega ajuste dinámico */
+        padding: 0px; /* Evita el desbordamiento del contenido */
+        position: relative; /* Permite ajustes relativos */
+        -webkit-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        -moz-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+    }
+    
+}
+
+/* Estilos para pantallas menores a 1500px */
+@media (max-width: 1500px) {
+
+    /* estilos divs de segmentacion */
+    .segmen-cont {
+        width: 100px;        /* Ancho fijo */
+        height: 265px;       /* Altura fija */
+        overflow-y: scroll;  /* Habilitar scroll vertical si el contenido es mayor */
+        overflow-x: hidden;  /* Evitar scroll horizontal */
+        box-sizing: border-box;
+        margin-bottom: 5px;
+    }
+
+    .segmen-cont .ant-segmented-group {
+        width: 100px !important;
+        
+    }
+    .segmen-cont .ant-segmented-item-label {
+        text-align: left;
+        font-size: 9px;
+        padding-inline: 4px;
+    }
+    /*  ------------- */
+    .parent {
+        display: grid;
+        grid-template-columns: repeat(15, 1fr);
+        grid-template-rows: repeat(18, 1fr);
+        gap: 8px;
+        height: 550px !important;
+    }
+        
+    .div1 {
+        grid-column: span 3 / span 3;
+        grid-row: span 18 / span 18;
+        border: 1px solid blue;
+    }
+    
+    .div2 {
+        grid-column: span 3 / span 3;
+        grid-row: span 7 / span 7;
+        grid-column-start: 4;
+        border: 1px solid blue;
+        display: flex; /* Usar flexbox para alinear el contenido */
+        justify-content: center; /* Centrar horizontalmente */
+        align-items: center; /* Centrar verticalmente */
+        overflow: hidden; /* Ocultar contenido desbordado */
+        width: 100%; /* Ajustarse al ancho disponible */
+        height: 100%; /* Ajustarse al alto disponible */
+    }
+    
+    .div3 {
+        grid-column: span 3 / span 3;
+        grid-row: span 11 / span 11;
+        grid-row-start: 8;
+        grid-column-start: 4;
+        border: 1px solid blue;
+    }
+
+    .div4 {
+        grid-column: span 9 / span 9;
+        grid-row: span 6 / span 6;
+        grid-column-start: 7;
+        grid-row-start: 1;
+        display: flex; /* Mantén flexbox */
+        justify-content: center; /* Centra horizontalmente */
+        align-items:baseline; /* Centra verticalmente */
+        overflow: hidden; /* Oculta contenido desbordado */
+        width: 100%; /* Ajusta al ancho disponible */
+        height: 100%; /* Agrega ajuste dinámico */
+        padding: 0px; /* Evita el desbordamiento del contenido */
+        position: relative; /* Permite ajustes relativos */
+        -webkit-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        -moz-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+    }
+    
+    
+    .div5 {
+        grid-column: span 9 / span 9;
+        grid-row: span 6 / span 6;
+        grid-column-start: 7;
+        grid-row-start: 7;
+        display: flex; /* Mantén flexbox */
+        justify-content: center; /* Centra horizontalmente */
+        align-items:baseline; /* Centra verticalmente */
+        overflow: hidden; /* Oculta contenido desbordado */
+        width: 100%; /* Ajusta al ancho disponible */
+        height: 100%; /* Agrega ajuste dinámico */
+        padding: 0px; /* Evita el desbordamiento del contenido */
+        position: relative; /* Permite ajustes relativos */
+        -webkit-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        -moz-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+    }
+    
+    .div6 {
+        grid-column: span 9 / span 9;
+        grid-row: span 6 / span 6;
+        grid-column-start: 7;
+        grid-row-start: 13;
+        display: flex; /* Mantén flexbox */
+        justify-content: center; /* Centra horizontalmente */
+        align-items:baseline; /* Centra verticalmente */
+        overflow: hidden; /* Oculta contenido desbordado */
+        width: 100%; /* Ajusta al ancho disponible */
+        height: 100%; /* Agrega ajuste dinámico */
+        padding: 0px; /* Evita el desbordamiento del contenido */
+        position: relative; /* Permite ajustes relativos */
+        -webkit-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        -moz-box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+        box-shadow: -5px 6px 6px 1px rgba(0,0,0,0.1);
+    }
+}

@@ -1,0 +1,52 @@
+.sidebar {
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  position: fixed;
+  top: 0;
+  right: 10px;
+  width: 600px;
+  height: fit-content;
+  overflow-x: auto;
+  overflow-y: hidden;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  z-index: 1000;
+}
+
+.sidebar-title {
+  flex: 0 0 auto; /* Para que el título no se expanda ni contraiga */
+  margin-right: 20px; /* Espacio entre el título y los enlaces */
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.sidebar-links {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap; /* Para que los elementos no se envuelvan en la siguiente línea */
+  gap: 10px; /* Espacio entre los enlaces */
+}
+
+.sidebar-link {
+  display: flex;
+  flex-direction: column; /* Para que el icono esté encima del título */
+  align-items: center; /* Centra el icono y el título */
+  text-decoration: none;
+  color: #969696;
+  text-align: center;
+  margin: 0;
+  transition: 0.3s ease;
+}
+
+.sidebar-icon {
+  width: 30px;
+  height: 30px;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 5px; /* Espacio entre el icono y el título */
+}
+
+.sidebar-link span {
+  font-size: 11px;
+}

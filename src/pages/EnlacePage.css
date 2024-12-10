@@ -1,0 +1,52 @@
+.grid-apps {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); /* Ajusta el tamaño mínimo de las columnas */
+    padding: 20px;
+  }
+  
+  .app-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    background-color: #f9f9f9;
+    overflow: hidden; 
+    width: 130px; 
+    height: 130px;
+  }
+  
+  .app-image {
+    margin-bottom: 10px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 50px;
+    width: 50px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .app-container h4, .app-container p {
+    font-size: 12px;
+    margin: 0;
+    font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden; 
+    text-overflow: ellipsis;
+  }
+  
+  .app-container p {
+    color: gray;
+    font-size: 11px;
+  }
+  
+  @media (max-width: 600px) {
+    .grid-apps {
+      grid-template-columns: 1fr;
+    }
+  }
+  

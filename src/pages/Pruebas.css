@@ -1,0 +1,219 @@
+
+.tablero-container {
+    display: block;
+    flex-shrink: 0;
+    align-self: flex-start;
+    padding: 0 6px;
+    height: 100%;
+    white-space: nowrap;
+}
+
+.tablero-base {
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 272px;
+    max-height: 100%;
+    padding-bottom: 8px;
+    border-radius: 12px;
+    background: rgb(241, 242, 244);
+    box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
+    vertical-align: top;
+    white-space: normal;
+    scroll-margin: 8px;
+}
+
+.tablero-titulo {
+    display: flex;
+    position: relative;
+    flex-grow: 0;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 8px 8px 0;
+    row-gap: 0;
+}
+
+.tablero-titulo h2 {
+    display: block;
+    margin: 0;
+    padding: 6px 8px 6px 12px;
+    overflow: hidden;
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: normal;
+    cursor: pointer;
+    overflow-wrap: anywhere;
+}
+
+.tablero-titulo-espacioinferior{
+    flex-shrink: 0;
+    height: 8px;
+    margin-bottom: -2px;
+}
+
+.tablero-organizador{
+    display: flex;
+    z-index: 1;
+    flex: 1 1 auto;
+    flex-direction: column;
+    margin: 0 4px;
+    padding: 0px 4px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    list-style: none;
+    row-gap: 8px;
+    -webkit-transform: translate3d(0, 0, 0);
+    scrollbar-width: thin;
+}
+
+.tarjeta-container {
+    position: relative;
+    min-height: 36px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid transparent;
+    box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
+    scroll-margin: 8px;
+    transition: 0.3s ease;
+    margin-bottom: 4px;
+    cursor: pointer;
+}
+
+.tarjeta-container:hover {
+    border: 1px solid var(--color-warning);
+}
+
+.tarjeta-txt {
+    display: flow-root;
+    position: relative;
+    z-index: 10;
+    min-height: 24px;
+    padding: 8px 12px 4px;
+    margin-bottom: 4px;
+}
+
+/* BOTON */
+.boton-container {
+    display: flex;
+    align-items: center;
+    min-height: 60px; /* Aumenta el tamaño del botón */
+    padding: 8px 12px; /* Ajusta el padding para el botón */
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid transparent;
+    box-shadow: var(--ds-shadow-raised, 0px 1px 1px #091e4240, 0px 0px 1px #091e424f);
+    cursor: pointer;
+    transition: 0.3s ease;
+    text-align: left; 
+    min-width: 240px;
+    max-width: 240px; /* Puedes ajustar el ancho según sea necesario */
+  }
+  
+  .boton-container:hover {
+    border: 1px solid var(--color-warning);
+  }
+  
+  .boton-icono {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px; /* Tamaño del ícono más grande */
+    width: 50px; /* Ajusta el ancho del contenedor del ícono */
+    height: 50px; /* Ajusta el alto del contenedor del ícono */
+    background-color: var(--color-icono-bg, #f0f0f0); /* Color de fondo del círculo */
+    border-radius: 50%; /* Hace que el contenedor sea circular */
+    padding: 15px; /* Espacio interno en el círculo */
+    margin-right: 15px; /* Espacio entre el ícono y el texto */
+  }
+  
+  .boton-texto {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .boton-titulo {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    white-space: normal;
+
+  }
+  
+  .boton-descripcion {
+    margin: 4px 0 0 0;
+    font-size: 12px;
+    color: var(--color-descripcion, #666);
+  }
+  
+
+/* ************* Flex de tarjetas ************* */
+
+.fbcards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* Tarjetas */
+.fbcards-card {
+  display: flex;
+  flex-direction: column;
+  width: calc(33.333% - 16px); /* Ajusta para máximo 3 por fila */
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.fbcards-card:hover {
+  border-color: #007BFF;
+  box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+  .fbcards-card {
+    width: 100%; /* Una tarjeta por fila */
+  }
+}
+
+/* Header de la tarjeta */
+.fbcards-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.fbcards-card-subtitle {
+  font-size: 0.8rem;
+  color: #555;
+  margin-right: 8px;
+}
+
+.fbcards-card-icon {
+  font-size: 1rem;
+  color: #007BFF;
+}
+
+/* Título */
+.fbcards-card-title {
+  font-size: 1.2rem;
+  margin: 8px 0;
+  color: #333;
+}
+
+/* Descripción */
+.fbcards-card-description {
+  font-size: 0.8rem;
+  color: #666;
+}

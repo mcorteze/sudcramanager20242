@@ -1,0 +1,89 @@
+.muro {
+  margin-left: 0; /* Mantiene el margen izquierdo */
+  max-width: 900px; /* Ancho máximo para pantallas grandes */
+  width: 100%; /* Asegura que tome todo el ancho disponible en pantallas pequeñas */
+  padding: 10px; /* Espaciado interno para evitar que el contenido toque los bordes */
+  display: flex; /* Configura el uso de flexbox */
+  flex-wrap: wrap; /* Permite que el contenido se envuelva */
+  gap: 16px; /* Espaciado entre elementos flex */
+  justify-content: flex-start; /* Alinea los elementos a la izquierda */
+  box-sizing: border-box; /* Incluye el padding dentro del ancho total */
+  border: 1px solid rgb(238, 238, 238);
+}
+
+@media (max-width: 768px) {
+  .muro {
+      padding: 5px; /* Ajusta el padding en pantallas pequeñas */
+      max-width: calc(100% - 20px); /* Asegura márgenes en pantallas pequeñas */
+  }
+}
+
+.fbcards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start; /* Cambia a alineación a la izquierda */
+}
+
+/* Tarjetas */
+.fbcards-card {
+  display: flex;
+  flex-direction: column;
+  width: calc(33.333% - 16px); /* Ajusta para máximo 3 por fila */
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.fbcards-card:hover {
+  border-color: rgb(134, 134, 134);
+  box-shadow: 0 4px 8px rgba(94, 94, 94, 0.3);
+}
+
+/* Ajuste para pantallas pequeñas */
+@media (max-width: 768px) {
+  .fbcards-card {
+      width: 100%; /* Una tarjeta por fila */
+  }
+}
+
+/* Header de la tarjeta */
+.fbcards-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.fbcards-card-subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin-right: 8px;
+}
+
+.fbcards-card-icon {
+  font-size: 1rem;
+  color: #555;
+}
+
+.fbcards-card-icon svg {
+  width: 1.4em;
+  height: 1.4em;
+}
+
+/* Título */
+.fbcards-card-title {
+  font-size: 1.2rem;
+  margin: 8px 0 6px 0;
+  color: rgb(0, 106, 144);
+}
+
+/* Descripción */
+.fbcards-card-description {
+  font-size: 0.8rem;
+  color: #666;
+}

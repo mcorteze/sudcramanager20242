@@ -1,0 +1,38 @@
+/* EditarTareaModal.css */
+
+/* Estilo para el campo de Nombre de la Tarea */
+.task-name-input {
+    width: 100%;
+    font-size: 1.2em; /* Aumenta el tamaño de la letra */
+    border: 2px solid transparent; /* Borde transparente */
+    padding: 10px; /* Espaciado interno */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+  }
+  
+  /* Estilo para el grid de 3 columnas */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas de igual ancho */
+    gap: 16px; /* Espacio entre las columnas */
+  }
+  
+  /* Ajustes generales para los elementos del formulario */
+  .ant-form-item {
+    margin-bottom: 16px; /* Espaciado entre los elementos */
+  }
+  
+  /* Estilo para las casillas de verificación */
+  .ant-checkbox {
+    margin-right: 16px; /* Espaciado a la derecha de cada checkbox */
+  }
+  
+  /* Opcional: Estilos para el modal */
+  .ant-modal-title {
+    font-size: 1.5em; /* Tamaño del título del modal */
+  }
+  
+  .ant-modal-body {
+    padding: 20px; /* Espaciado interno del cuerpo del modal */
+  }
+  
+  

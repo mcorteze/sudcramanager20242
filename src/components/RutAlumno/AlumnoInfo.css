@@ -1,0 +1,23 @@
+/* AlumnoInfo.css */
+
+.alumno-info-container {
+    margin-bottom: 16px; /* Margen entre el título y el contenido */
+  }
+  
+  .row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Espaciado entre filas */
+  }
+  
+  .label {
+    margin-right: 10px; /* Espacio entre el label y el input */
+    font-weight: bold; /* Para que el label se vea más destacado */
+    min-width: 100px; /* Ancho mínimo para las etiquetas */
+  }
+  
+  .input {
+    width: 100%; /* El input se ajusta al 100% de su contenedor */
+    max-width: 300px; /* Máximo ancho del input */
+  }
+  

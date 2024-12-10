@@ -1,0 +1,78 @@
+// desde la base de datos anterior se deben eliminar los registros de algunas tablas: 
+//delete from inscripcion;
+//delete from item_medida;
+//delete from item_respuesta;
+//delete from item;
+//delete from matricula_eval_itemresp;
+//delete from matricula_eval;
+//delete from matricula;
+//delete from informes_secciones;
+//delete from informe_alumnos;
+//delete from secciones;
+// asignaturas
+//delete from eval;
+//delete from escala;
+//delete from errores;
+//delete from calificaciones_obtenidas;
+//delete from lectura;
+//delete from archivosleidos;
+//delete from imagenes;
+//delete from alumnos_a;
+//delete from inscripcion_a;
+//delete from matricula_a;
+//delete from secciones_a;
+//delete from docentes_a;
+// ---------------
+// cargar planes
+// cargar tablas
+
+---
+Cosas para disponer
+Formulario de planillas
+Bi de monitor
+Forms para hojas de respuestas
+
+-----
+Rutina crea_carpetas.py para crear carpetas segun evaluacion por programa
+Se envia como zip solo para organizar las imagenes en local
+
+
+
+Apuntes reunion de tablas de especificaciones
+en sudcraultra_access/tablas de especificaciones/'carpeta del programa'
+en Planillas_base(archivo excel que genera las bases masivamente) se cambio la hoja donde se listan las asignaturas a "Listado base" y tiene un nuevo campo llamado "Es grupal" que sirve para indicar si debe tener orden de grupo con ("x" si es con orden de grupo)
+Las planillas base generadas quedaran en sudcraultra_access/SISTEMA/planillas_base
+Luego se generan las planillas (haciendo uso de la planilla base respectiva)
+
+En cuanto a ppt, quedan alojados en SUDCRA/pptTemplates/
+Se debe insertar a modo de reemplazo la primera lamina en ppt anteriores que lleva los textos "RETRO", "SECCION" y "PROFESOR"
+
+Respecto a control error
+falta orden correlativo en ru y de
+
+Pendientes
+Enviar link de acceso a la carpeta del programa de las planillas emitidas.
+Sistema de carpeta de alojamiento de escaneos que tiene cada sede.
+
+
+En pgadmin
+En eval se pueden ver las tablas cargadas
+
+
+Al inicio del semestre realizan pruebas de flujos, de todos.
+
+En el caso de las tablas de matricula e inscripcion hay que borrar y luego cargar (para cuando se actualizan las bases), las otras solo se iran agregando. ojo: primero se elimina inscripcion y luego matricula.
+
+DELETE FROM inscripcion;
+
+DELETE FROM matricula;
+
+Luego cargar consolidado usando: carga_tabla_actualiza.
+
+
+// Construir vista para visualizar las tablas cargadas con el nombre de la evaluacion (una tabla) y ver datos de la tabla como las formas o cantidad de formas
+
+// agregar un estudiante de intercambio a sudcra: manualmente lo agrego en la tabla matricula. observacion: los campos ano y periodo fue necesario agregar los valores a las columnas completas la primera vez, es decir cuando se inicio el proyecto a comienzo de semestre. En dicha instancia no encontramos el numero del plan en sap y figuraba como "Intercambio" y el nombre del plan como "PLAN INTERCAMBIO". por lo tanto en la tabla "planes" inventamos el plan un cod_plan = 9999999, nombre_plan="PLAN DE INTERCAMBIO", cod carrera nombre carrera y demas quedaron en blanco. Luego agregamos el cod_plan al registro en la tabla matricula. Luego agregamos el registro manual en inscripcion.
+
+// BORRAR TABLA DE especificaciones
+BORRAR REGISTRO DESDE TABLA EVAL

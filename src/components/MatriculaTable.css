@@ -1,0 +1,15 @@
+.matricula-table-container {
+    margin: 10px;
+}
+
+.icon-default {
+    color: rgba(182, 190, 201, .9);
+    cursor: default;
+  }
+  
+  .icon-active {
+    color: #0f1939;
+    cursor: pointer;
+    background: yellow;
+  }
+  

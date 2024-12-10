@@ -1,0 +1,208 @@
+/* Colores variables */
+:root {
+    --color-bg: rgb(245, 245, 245);
+    --color-ventana: #fff;
+    --color-mensaje-bg: rgb(229, 246, 253); 
+    --color-mensaje-text: rgb(107, 151, 170);
+    --color-primario: #0f1939;
+    --color-secundario: rgb(15, 123, 231);
+    --color-suave:  rgb(177, 214, 252);
+    --color-warning: #ffb800;
+    --color-warning-debil: rgba(255, 184, 0, 0.2);
+    --color-hover: #fd2282;
+    --texto-gris-fuerte: #808080;
+    --texto-gris-debil1: #b0b0b0;
+    --texto-gris-debil2: rgb(208, 215, 222);
+    /* grises */
+    --gris-titulo: #030136;
+    --gris-iconography: #64748B;
+    --gris-bodytext: #595960;
+    --gris-curatorsection: #8D95A2; /* seccion destacada */
+}
+
+.page-full {
+    height: 100vh;
+}
+
+.page-full h1 {
+    width: 100%;
+    text-align: left;
+    font-size: 1.4em;
+    font-weight: 300;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    color: var(--gris-titulo);
+    border-bottom: 1px solid var(--texto-gris-debil2);
+}
+
+.page-full h2 {
+    width: 100%;
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: 400;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    color: var(--gris-titulo);
+}
+
+/* Componente layout */
+.ant-typography,
+.ant-form-item-required {
+    color: hsl(215, 15%, 92%) !important;
+}
+.ant-layout {
+    height: 100vh;
+    background: var(--color-bg);
+    height: 100%;
+}
+
+/* Color para los componentes tipo titulo y otros de Ant Design */
+.ant-typography,
+.ant-form-item-required {
+    color: var(--color-primario) !important;
+}
+
+/* Sidebar */
+.ant-layout-sider-children,
+.ant-menu {
+    background: rgb(13, 113, 146);
+    color: var(--color-ventana);
+}
+
+.ant-menu {
+    margin-inline: 10px !important;
+    width: auto;
+}
+.ant-menu-title-content{
+    color: rgb(161, 197, 211);
+    transition: width 0.3s cubic-bezier(0.2, 0, 0, 1) 0s !important;
+}
+.ant-menu-title-content:hover,
+.ant-menu-item-selected .ant-menu-title-content{
+    color: var(--color-ventana) !important;
+}
+
+.ant-menu-item-selected {
+    color: var(--color-ventana) !important;
+}
+
+.ant-layout-sider {
+    position: fixed !important;
+    top: 40 !important;
+    left: 0 !important;
+    height: 100%;
+    z-index: 1000;
+    background: var(--color-ventana) !important;
+    border-right: 1px solid var(--texto-gris-debil);
+}
+
+/* Item menu */
+.ant-menu .ant-menu-item-selected {
+    background: rgba(7, 65, 85, 0);
+    border: 1px solid rgba(21, 171, 221, 0.5);
+    box-shadow: 0px 2px 8px rgba(20, 172, 223, 0.6);
+    color: var(--color-primario);
+}
+
+/* Main */
+.ant-layout-content {
+    background: var(--color-ventana) !important;
+    color: var(--color-primario);
+    border: 1px solid (--texto-gris-fuerte);
+}
+
+/* Tabla */
+.ant-table-content {
+    background: var(--color-ventana) !important;
+}
+
+.ant-table-thead,
+.ant-table-thead tr th,
+.ant-table-tbody,
+.ant-table-tbody tr{
+    background: transparent !important;
+}
+
+/* Border inferior de los campos*/
+.ant-table-thead th{
+    border-bottom: 1px solid (--texto-gris-fuerte) !important;
+}
+
+.ant-table-cell{
+    border-bottom: 1px solid transparent !important;
+}
+
+/* Color de letra de las celdas*/
+.ant-table-cell {
+    color: var(--color-primario) !important;
+}
+
+/* Color bg hover de las celdas*/
+.ant-table-cell:hover {
+    background: var(--color-mensaje-bg) !important;
+    color: var(--color-mensaje-text) !important;
+}
+
+/* Color bg hover de las filas */
+.ant-table-row:hover td{
+    background: var(--color-warning-debil) !important;
+    color: var(--color-primario) !important;
+}
+
+.ant-table-thead tr th {
+    border-bottom: 1px solid var(--color-mensaje-bg) !important;
+}
+
+/* formato de iconos */
+.icon-tamano1 svg {
+    font-size: 16px;
+}
+
+/* Borde de tablas */
+.custom-table td, .custom-table th {
+    font-size: 13px;
+    padding: 6px 12px !important;
+    border: 1px solid #ddd !important; /* Añadiendo borde consistente con la segunda clase de AntDesign */
+}
+
+/* Primera clase que define estilos de tabla de AntDesign */
+.ant-descriptions-view table tbody tr th,
+.ant-descriptions-view table tbody tr td {
+  padding: 6px !important;
+  border: 1px solid gray !important;
+}
+
+/* Segunda clase que define estilos de tabla de AntDesign */
+.ant-table-content table thead tr th,
+.ant-table-content table tbody tr th,
+.ant-table-content table tbody tr td {
+  padding: 6px !important;
+  border: 1px solid #ddd !important;
+}
+
+/* Estilo para asegurar consistencia en los bordes de todas las tablas */
+.custom-table,
+.ant-descriptions-view table,
+.ant-table-content table {
+  border-collapse: collapse; /* Asegura que los bordes no se dupliquen */
+}
+
+.table_formato1 {
+margin: 15px 0 30px 0;
+width: fit-content;
+}
+
+.table_formato1 .summary-row {
+border-bottom: 1px solid var(--texto-gris-debil2) !important; /* Borde completo */
+border-top: 2px solid #1890ff; /* Resaltar el borde superior */
+}
+
+.formato-table1 {
+margin: 0 20px 24px 0px;
+max-width: fit-content;
+}
+
+.formato-table1 th,
+.formato-table1 tr{
+font-size: 12px !important;
+}

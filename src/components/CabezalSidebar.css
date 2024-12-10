@@ -1,0 +1,19 @@
+.cabezal-sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 14px 30px 14px;
+    height: fit-content;
+    /* background: linear-gradient(36deg, rgba(15,25,57,1) 0%, rgba(255,255,255,0.05) 87%); */
+}
+
+.cabezal-sidebar span {
+    color: #ffb800;
+}
+
+.cabezal-img {
+    width: 100%;
+    margin: 10px 0px;
+}
+

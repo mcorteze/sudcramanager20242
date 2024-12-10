@@ -1,0 +1,128 @@
+.apunte-container {
+    min-width: 800px;
+    margin: 20px 0px;
+    padding: 10px;
+    width: 100%;
+    background: #eee;
+}
+
+.apunte-content {
+    margin: 0px auto;
+    width: 80%;
+    max-width: 960px;
+}
+
+/* Estilos apuntes */
+.apuntes-canvas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 60%;
+    min-width: 600px;
+    margin-inline: auto;
+}
+
+.apuntes-titulo-descripcion {
+    width: 100%;
+    text-align: left;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    color: #fd2282;
+    font-size: 13px;
+    font-weight: 300;
+}
+
+h1 {
+    width: 100%;
+    text-align: left;
+    font-size: 1.8em;
+    font-weight: 300;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    color: var(--gris-titulo);
+}
+
+h2 {
+    width: 100%;
+    text-align: left;
+    font-size: 1.5em;
+    font-weight: 300;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    color: var(--gris-titulo);
+}
+
+.apuntes-canvas h1 {
+    width: 100%;
+    text-align: left;
+    font-size: 1.4em;
+    font-weight: 300;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    color: var(--gris-titulo);
+    border-bottom: 1px solid var(--texto-gris-debil2);
+}
+
+.apunte-card1 {
+    width: 100%;
+    min-width: 500px;
+    font-size: 13px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    padding: 30px;
+    margin: .5em 0;
+    overflow: auto;
+    box-shadow: 2px 2px rgba(10, 16, 20, .24), 0 0 2px rgba(10, 16, 20, .12);
+    border: 1px solid #e0e0e0;
+    word-wrap: break-word;
+    line-height: 1.42;
+}
+
+.apunte-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.apunte-card1 img {
+    margin: 12px 0;
+}
+
+.apunte-obs {
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: #808080;
+    margin: 4px;
+    overflow: auto;
+}
+
+.apuntes-text {
+    color: var(--gris-bodytext);
+    text-align: left;
+    font-size: 1.1em;
+    width: 100%;
+    padding: 8px 0px;
+}
+
+.apuntes-text p {
+    margin: 12px 0px;
+    text-align: justify;
+}
+
+.apuntes-text ul {
+    margin-top: 0px;
+}
+
+.menu-iconstyle {
+    font-size: 18px;
+    font-weight: normal;
+    color: rgb(73, 80, 87);
+    margin-right: 5px;
+}
+
+.apuntes-footer {
+    height: 100px;
+    width: 100%;
+}

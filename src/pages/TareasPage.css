@@ -1,0 +1,17 @@
+.tareas-container {
+    display: flex;
+    min-height: 100vh; /* Altura mínima de la pantalla completa */
+  }
+  
+  .menu-container {
+    width: 200px; /* Ancho fijo para el menú */
+    background-color: #f4f4f4; /* Fondo para el menú */
+    padding: 20px; /* Espacio interno */
+  }
+  
+  .content-container {
+    flex-grow: 1; /* Ocupa el espacio restante a la derecha */
+    padding: 20px; /* Espacio interno */
+    background-color: #fff; /* Fondo para el contenido */
+  }
+  

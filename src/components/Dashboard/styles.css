@@ -1,0 +1,13 @@
+/* Clase para el tamaño de fuente en el gráfico */
+.bar-chart-title {
+    font-size: 24px; /* Titulo del gráfico */
+  }
+  
+  .bar-chart-tick {
+    font-size: 12px; /* Tamaño de fuente de las etiquetas en los ejes */
+  }
+  
+  .bar-chart-tooltip {
+    font-size: 12px; /* Tamaño de fuente del contenido del tooltip */
+  }
+  
