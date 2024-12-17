@@ -27,10 +27,8 @@ const ImagenesTable = ({ idSeccion }) => {
   };
 
   const columns = [
-    { title: 'ID Sede', dataIndex: 'id_sede', key: 'id_sede' },
-    { title: 'Código Asignatura', dataIndex: 'cod_asig', key: 'cod_asig' },
-    { title: 'Número Sección', dataIndex: 'num_seccion', key: 'num_seccion' },
     { title: 'Evaluación', dataIndex: 'evaluacion', key: 'evaluacion' },
+    { title: 'Subida por', dataIndex: 'subidapor', key: 'subidapor' },
     { 
       title: 'ID Lista', 
       dataIndex: 'id_lista', 
@@ -61,7 +59,7 @@ const ImagenesTable = ({ idSeccion }) => {
           dataSource={data}
           columns={columns}
           rowKey="id_imagen"
-          pagination={{ pageSize: 5 }}
+          pagination={ false }
         />
       )}
     </div>

@@ -24,6 +24,7 @@ const DocenteTable = ({ data, loading, onDelete }) => (
     ]}
     rowKey="rut_docente"
     loading={loading}
+    pagination={false}
   />
 );
 

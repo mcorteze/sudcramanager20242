@@ -10,10 +10,10 @@ app.use(express.json()); // Middleware para permitir que Express entienda JSON e
 
 const pool = new Pool({
   user: 'postgres',
-  host: '10.10.101.99',
-  database: 'sudcra',
-  //host: 'localhost',
-  //database: 'sudcra_1123',
+  //host: '10.10.101.99',
+  //database: 'sudcra',
+  host: 'localhost',
+  database: 'sudcra_1123',
   password: 'fec4a5n5',
   port: 5432,
 });
@@ -1006,6 +1006,33 @@ app.get('/api/informes/pendientes-mail-alumnos', async (req, res) => {
 });
 
 // SEGUIMIENTO DE IMAGENES
+// Endpoint para obtener el id_eval de matricula_eval
+app.get('/api/seguimientoimageneval/:num_imagen', async (req, res) => {
+  const { num_imagen } = req.params; // Obtener el parámetro de la URL
+  try {
+    const result = await pool.query(
+      `
+      SELECT
+        id_eval
+      FROM matricula_eval
+      WHERE imagen LIKE $1 ESCAPE '\\'
+      LIMIT 1;
+      `,
+      [`${num_imagen}\\_%`] // Patrón con escape del guion bajo
+    );
+
+    // Si no se encuentra un resultado, devolver un mensaje adecuado
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'No se encontró la evaluación para la imagen dada' });
+    }
+
+    // Responder con el resultado
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error('Error en la consulta SQL:', err.message);
+    res.status(500).json({ error: 'Error en la consulta SQL' });
+  }
+});
 
 // Endpoint para obtener errores con los campos específicos
 app.get('/api/errores/:num_imagen', async (req, res) => {
@@ -1052,7 +1079,8 @@ app.get('/subidasporidseccion/:id_seccion', async (req, res) => {
 
   const query = `
     SELECT DISTINCT ON (i.id_lista)
-      i.id_imagen, 
+      i.id_imagen,
+      i.subidapor, 
       i.id_lista, 
       i.id_sede, 
       i.evaluacion, 
@@ -1080,6 +1108,64 @@ app.get('/subidasporidseccion/:id_seccion', async (req, res) => {
     res.status(500).json({ error: 'Error en la consulta de la base de datos' });
   }
 });
+
+// nombre archivo con registro en matricula_eval es decir con calificacion
+app.get('/api/archivosleidosconcalificacion', async (req, res) => {
+  const { string1 = '', string2 = '', string3 = '', string4 = '' } = req.query;
+
+  // Construcción dinámica del patrón de búsqueda
+  const searchPattern = `%${string1}%${string2}%${string3}%${string4}%`;
+
+  const query = `
+    SELECT DISTINCT ON (al.id_archivoleido)
+        al.id_archivoleido,
+        al.marcatemporal,
+      EXTRACT(YEAR FROM al.marcatemporal) AS anio,
+      EXTRACT(MONTH FROM al.marcatemporal) AS mes,
+      EXTRACT(DAY FROM al.marcatemporal) AS dia,
+        me.id_matricula,
+        me.id_eval,
+        me.id_seccion,
+        al.archivoleido,
+        CASE 
+            WHEN me.id_archivoleido IS NOT NULL THEN 'Sí'
+            ELSE 'No'
+        END AS tiene_coincidencia
+    FROM 
+        public.archivosleidos al
+    LEFT JOIN 
+        (
+            SELECT 
+                me.id_archivoleido,
+                me.id_matricula,
+                me.id_eval,
+                ins.id_seccion,
+                s.id_seccion AS id_seccion_s,
+                s.cod_asig
+            FROM 
+                matricula_eval me
+            LEFT JOIN 
+                inscripcion ins ON ins.id_matricula = me.id_matricula
+            LEFT JOIN 
+                secciones s ON s.id_seccion = ins.id_seccion
+                AND s.cod_asig = split_part(me.id_eval, '-', 1)
+        ) AS me ON al.id_archivoleido = me.id_archivoleido
+    WHERE 
+        al.archivoleido LIKE $1
+    ORDER BY 
+        al.id_archivoleido, me.id_matricula;
+  `;
+  const values = [searchPattern];
+
+  try {
+      const result = await pool.query(query, values);
+      res.json(result.rows);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al consultar la base de datos' });
+  }
+});
+
 
 // Endpoint para obtener imágenes con campos específicos
 app.get('/api/imagenes/:num_imagen', async (req, res) => {
@@ -1232,14 +1318,16 @@ app.get('/api/seccion_informes', async (req, res) => {
     // Definir la consulta
     const query = `
       SELECT
-          id_informeseccion,
-          id_eval,
-          mail_enviado,
-          marca_temp_mail,
-          'https://duoccl0-my.sharepoint.com/personal/lgutierrez_duoc_cl/Documents/SUDCRA/informes/2024002/secciones/' || id_eval || '_' || id_seccion || '.html' AS link_informe
-      FROM informes_secciones
-      WHERE id_seccion = $1
-      ORDER BY id_eval ASC;
+          ise.id_informeseccion,
+          ise.id_eval,
+          e.nombre_prueba,
+          ise.mail_enviado,
+          ise.marca_temp_mail,
+          'https://duoccl0-my.sharepoint.com/personal/lgutierrez_duoc_cl/Documents/SUDCRA/informes/2024002/secciones/' || ise.id_eval || '_' || ise.id_seccion || '.html' AS link_informe
+      FROM informes_secciones as ise
+      JOIN eval as e on e.id_eval = ise.id_eval
+      WHERE ise.id_seccion = $1
+      ORDER BY ise.id_eval ASC;
     `;
 
     // Capturar el parámetro id_seccion desde la query string
@@ -1280,6 +1368,7 @@ app.get('/api/estadisticas', async (req, res) => {
         eval as e ON e.id_eval = me.id_eval
       JOIN
         asignaturas as a ON a.cod_asig = e.cod_asig
+      ORDER BY e.cod_asig;
     `;
 
     const result = await pool.query(query);
@@ -1354,7 +1443,7 @@ app.get('/api/informes-enviados-alumno/:id_matricula', async (req, res) => {
       JOIN matricula_eval as me ON ia.id_matricula_eval = me.id_matricula_eval
       JOIN eval as e ON me.id_eval = e.id_eval
       WHERE ia.id_matricula_eval LIKE $1
-      ORDER BY ia.marca_temp_mail ASC
+      ORDER BY e.cod_asig, e.nombre_prueba, ia.id_informealum, ia.marca_temp_mail ASC
     `, [`${id_matricula}%`]); // Usar LIKE con el patrón dado
     res.json(result.rows);
   } catch (err) {
@@ -1362,6 +1451,89 @@ app.get('/api/informes-enviados-alumno/:id_matricula', async (req, res) => {
     res.status(500).json({ error: 'Error en la consulta SQL' });
   }
 });
+
+// API PARA ESCRIBIR
+app.put('/api/rehacerinformealumno', async (req, res) => {
+  const { idMatriculaEval } = req.body; // Recibimos el id_matricula_eval
+  console.log("idMatriculaEval recibido:", idMatriculaEval);
+
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN'); // Iniciamos la transacción
+
+    const query = `
+      UPDATE calificaciones_obtenidas
+      SET informe_listo = False
+      WHERE id_matricula_eval = $1
+      RETURNING *;
+    `;
+
+    const result = await client.query(query, [idMatriculaEval]);
+
+    console.log("Resultado de la consulta:", result.rows);
+
+    if (result.rowCount === 0) {
+      console.log("No se encontró ningún registro para actualizar.");
+      throw new Error('No se encontró ninguna matrícula para actualizar.');
+    }
+
+    await client.query('COMMIT'); // Confirmamos la transacción
+
+    res.status(200).json({
+      message: 'Campo informe_listo actualizado correctamente a false.',
+      updatedRows: result.rows, // Retorna el registro actualizado
+    });
+  } catch (err) {
+    await client.query('ROLLBACK'); // Deshacemos cambios si ocurre un error
+    console.error('Error en el servidor:', err.message);
+    res.status(500).json({ error: err.message });
+  } finally {
+    client.release(); // Liberamos la conexión
+  }
+});
+
+app.put('/api/reenviarinformealumno', async (req, res) => {
+  const { idMatriculaEval } = req.body; // Recibimos el id_matricula_eval
+  console.log("idMatriculaEval recibido:", idMatriculaEval);
+
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN'); // Iniciamos la transacción
+
+    const query = `
+      UPDATE informe_alumnos
+      SET mail_enviado = true
+      WHERE id_matricula_eval = $1
+      RETURNING *;
+    `;
+
+    const result = await client.query(query, [idMatriculaEval]);
+
+    console.log("Resultado de la consulta:", result.rows);
+
+    if (result.rowCount === 0) {
+      console.log("No se encontró ningún registro para actualizar.");
+      throw new Error('No se encontró ninguna matrícula para actualizar.');
+    }
+
+    await client.query('COMMIT'); // Confirmamos la transacción
+
+    res.status(200).json({
+      message: 'Campo mail_enviado actualizado correctamente a false.',
+      updatedRows: result.rows, // Retorna el registro actualizado
+    });
+  } catch (err) {
+    await client.query('ROLLBACK'); // Deshacemos cambios si ocurre un error
+    console.error('Error en el servidor:', err.message);
+    res.status(500).json({ error: err.message });
+  } finally {
+    client.release(); // Liberamos la conexión
+  }
+});
+
+
 
 app.get('/api/listado_calificaciones_obtenidas', async (req, res) => { 
   try {
@@ -1403,7 +1575,7 @@ app.get('/api/listado_calificaciones_obtenidas_imagen', async (req, res) => {
     SELECT
         ROW_NUMBER() OVER (ORDER BY EXTRACT(MONTH FROM co.lectura_fecha), EXTRACT(DAY FROM co.lectura_fecha)) AS numeracion,  -- Campo de numeración
         MAX(co.lectura_fecha) AS ultima_lectura_fecha, -- Última fecha de lectura
-        EXTRACT(MONTH FROM co.lectura_fecha) || '-' || EXTRACT(DAY FROM co.lectura_fecha) AS fecha, -- Fecha en formato mes-día
+        EXTRACT(DAY FROM co.lectura_fecha) || '-' || EXTRACT(MONTH FROM co.lectura_fecha) AS fecha, -- Fecha en formato mes-día
         a.programa,
         COUNT(*) AS frecuencia
     FROM calificaciones_obtenidas AS co
@@ -1436,7 +1608,7 @@ app.get('/api/listado_calificaciones_obtenidas_planilla', async (req, res) => {
     SELECT
         ROW_NUMBER() OVER (ORDER BY EXTRACT(MONTH FROM co.lectura_fecha), EXTRACT(DAY FROM co.lectura_fecha)) AS numeracion,  -- Campo de numeración
         MAX(co.lectura_fecha) AS ultima_lectura_fecha, -- Última fecha de lectura
-        EXTRACT(MONTH FROM co.lectura_fecha) || '-' || EXTRACT(DAY FROM co.lectura_fecha) AS fecha, -- Fecha en formato mes-día
+        EXTRACT(DAY FROM co.lectura_fecha) || '-' || EXTRACT(MONTH FROM co.lectura_fecha) AS fecha, -- Fecha en formato mes-día
         a.programa,
         COUNT(*) AS frecuencia
     FROM calificaciones_obtenidas AS co
@@ -1465,27 +1637,50 @@ app.get('/api/listado_calificaciones_obtenidas_planilla', async (req, res) => {
 // ---------------------------------
 // Endpoint para reemplazar el docente en la tabla de secciones
 app.put('/api/reemplazar-docente', async (req, res) => {
-  const { rutNuevoDocente, idSede, seccion } = req.body;
+  const { rutNuevoDocente, seccion } = req.body;
+
+  const client = await pool.connect();
 
   try {
-    const query = `
+    await client.query('BEGIN');
+
+    const query1 = `
       UPDATE public.secciones
       SET rut_docente = $1
-      WHERE id_sede = $2 AND seccion = $3
+      WHERE id_seccion = $2
       RETURNING *;`;
 
-    const result = await pool.query(query, [rutNuevoDocente, idSede, seccion]);
+    const result1 = await client.query(query1, [rutNuevoDocente, seccion]);
 
-    if (result.rowCount > 0) {
-      res.status(200).json({ message: 'Docente reemplazado exitosamente en la sección.' });
-    } else {
-      res.status(404).json({ error: 'No se encontró ninguna sección para actualizar.' });
+    if (result1.rowCount === 0) {
+      throw new Error('No se encontró ninguna sección para actualizar en "secciones".');
     }
+
+    const query2 = `
+      UPDATE public.seccion_docente
+      SET rut_docente = $1
+      WHERE id_seccion = $2
+      RETURNING *;`;
+
+    const result2 = await client.query(query2, [rutNuevoDocente, seccion]);
+
+    if (result2.rowCount === 0) {
+      throw new Error('No se encontró ninguna sección para actualizar en "seccion_docente".');
+    }
+
+    await client.query('COMMIT');
+
+    res.status(200).json({
+      message: 'Docente reemplazado exitosamente en ambas tablas.'
+    });
   } catch (err) {
-    console.error('Error en la consulta SQL:', err);
+    await client.query('ROLLBACK');
     res.status(500).json({ error: 'Error en la consulta SQL' });
+  } finally {
+    client.release();
   }
 });
+
 
 // Endpoint para obtener las evaluaciones ordenadas
 app.get('/api/evaluaciones', async (req, res) => {

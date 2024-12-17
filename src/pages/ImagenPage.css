@@ -2,3 +2,16 @@
     height: 100%; /* Utiliza toda la altura de la ventana */
 }
 
+.search-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-info p {
+    display: flex;
+    align-items: center;
+    padding: 10px 0px;
+    margin: 0px;
+}

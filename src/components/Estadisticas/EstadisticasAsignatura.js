@@ -1,8 +1,8 @@
-// EstadisticasAsignatura.js
 import React, { useEffect, useState, useRef } from 'react';
-import { Select, Row, Col, Spin } from 'antd'; // Importa Spin desde Ant Design
-import { Box } from '@antv/g2plot'; // Importar Box de G2Plot
+import { Select, Row, Col, Spin, Button } from 'antd'; // Agregado Button desde Ant Design
+import { Box } from '@antv/g2plot';
 import axios from 'axios';
+import * as htmlToImage from 'html-to-image'; // Importa html-to-image
 
 const { Option } = Select;
 
@@ -150,6 +150,21 @@ export default function EstadisticasAsignatura() {
     }
   }, [data, promedios]);
 
+  const handleDownload = () => {
+    if (containerRef.current) {
+      htmlToImage.toPng(containerRef.current)
+        .then((dataUrl) => {
+          const link = document.createElement('a');
+          link.download = 'grafico.png';
+          link.href = dataUrl;
+          link.click();
+        })
+        .catch((error) => {
+          console.error('Error generating image:', error);
+        });
+    }
+  };
+
   return (
     <div>
       <Row gutter={[16, 16]}>
@@ -188,7 +203,12 @@ export default function EstadisticasAsignatura() {
         {loading ? (
           <Spin />
         ) : (
-          <div ref={containerRef} style={{ width: '100%', height: '500px' }} />
+          <>
+            <div ref={containerRef} style={{ width: '100%', height: '500px' }} />
+            <Button type="primary" onClick={handleDownload} style={{ marginTop: '20px' }}>
+              Descargar Gráfico
+            </Button>
+          </>
         )}
       </div>
     </div>

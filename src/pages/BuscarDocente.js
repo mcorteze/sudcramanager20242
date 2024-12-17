@@ -227,8 +227,7 @@ const BuscarDocente = () => {
     try {
       const response = await axios.put('http://localhost:3001/api/reemplazar-docente', {
         rutNuevoDocente: selectedDocenteRut,
-        idSede: selectedSede,
-        seccion: selectedSeccionValue
+        seccion: selectedSeccion
       });
 
       console.log(response.data.message);
@@ -427,6 +426,9 @@ const BuscarDocente = () => {
             <p>{selectedDocenteNombre}</p>
             <p>RUT: {selectedDocenteRut}</p>
             <hr />
+            {selectedSeccion && (
+              <p>ID de la Sección: <b>{selectedSeccion}</b></p>
+            )}
             <Button
               type="primary"
               onClick={confirmReemplazo}

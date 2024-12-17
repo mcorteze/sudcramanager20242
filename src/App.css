@@ -206,3 +206,33 @@ max-width: fit-content;
 .formato-table1 tr{
 font-size: 12px !important;
 }
+
+.marco-grid {
+    margin: 0 20px 24px 0px;
+    width: fit-content;
+    max-width: 700px;
+    padding: 20px;
+    border: 1px solid rgb(209, 209, 209);
+}
+
+.marco-grid p {
+  font-size: 12px;
+}
+
+.marco-grid .titulo {
+  font-weight: bold; /* O cualquier otro estilo que prefieras */
+  font-size: 12px;
+  color: #4d4d4d;
+  margin: 0 !important;
+}
+
+.buscar-seccion-table1 {
+  margin: 0 20px 24px 0px;
+  width: fit-content;
+  max-width: 1200px;
+}
+
+.buscar-seccion-table1 th,
+.buscar-seccion-table1 td{
+  font-size: 12px;
+}

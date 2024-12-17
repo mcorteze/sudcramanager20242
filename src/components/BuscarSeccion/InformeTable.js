@@ -11,6 +11,7 @@ const InformeTable = ({ data, loading }) => (
     columns={[
       { title: 'ID Informe', dataIndex: 'id_informeseccion', key: 'id_informeseccion' },
       { title: 'ID Evaluación', dataIndex: 'id_eval', key: 'id_eval' },
+      { title: 'Prueba', dataIndex: 'nombre_prueba', key: 'nombre_prueba' },
       {
         title: 'Mail Enviado',
         dataIndex: 'mail_enviado',
@@ -37,6 +38,7 @@ const InformeTable = ({ data, loading }) => (
     ]}
     rowKey="id_informeseccion"
     loading={loading}
+    pagination={false}
   />
 );
 

@@ -84,6 +84,11 @@ export default function RutAlumno() {
       {error && <Typography.Text type="danger">{error}</Typography.Text>}
       <AlumnoInfo alumnoInfo={alumnoInfo} />
       <InscripcionesTable inscripciones={inscripciones} setInscripciones={setInscripciones} />
+      
+      <Button type="primary" onClick={() => setModalVisible(true)} style={{ marginTop: '20px' }}>
+        Inscribir alumno
+      </Button>
+      
       <EvaluacionesTable alumnos={alumnos} />
       <DrawerSection 
         visible={drawerVisible} 
@@ -96,9 +101,6 @@ export default function RutAlumno() {
       {/* Llamada al componente InformesTable y pasando idMatricula como prop */}
       {idMatricula && <InformesTable idMatricula={idMatricula} />}
 
-      <Button type="primary" onClick={() => setModalVisible(true)} style={{ marginTop: '20px' }}>
-        Inscribir alumno
-      </Button>
 
       <ModalBuscarIdSeccion
         visible={modalVisible}

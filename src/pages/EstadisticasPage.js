@@ -6,7 +6,7 @@ import EstadisticasEvaluacion from '../components/Estadisticas/EstadisticasEvalu
 export default function EstadisticasPage() {
   return (
     <div>
-      <h1>Estadísticas</h1>
+      <h1>Estadísticas por Asignatura</h1>
       <EstadisticasAsignatura />
       <h1>Estadísticas por Evaluación</h1>
       <EstadisticasEvaluacion />
