@@ -5,6 +5,7 @@ const ErroresTable = ({ erroresData, loading }) => {
   const erroresColumns = [
     { title: 'ID Error', dataIndex: 'id_error', key: 'id_error' },
     { title: 'ID Archivo Leído', dataIndex: 'id_archivoleido', key: 'id_archivoleido' },
+    { title: 'ID Imagen', dataIndex: 'id_imagen', key: 'id_imagen' },
     { title: 'Imagen', dataIndex: 'imagen', key: 'imagen' },
     { title: 'Valida RUT', dataIndex: 'valida_rut', key: 'valida_rut', render: (text) => text ? 'Sí' : 'No' },
     { title: 'Valida Matrícula', dataIndex: 'valida_matricula', key: 'valida_matricula', render: (text) => text ? 'Sí' : 'No' },
