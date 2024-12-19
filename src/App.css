@@ -22,6 +22,8 @@
 
 .page-full {
     height: 100vh;
+    height: fit-content;
+    
 }
 
 .page-full h1 {
@@ -54,6 +56,7 @@
     height: 100vh;
     background: var(--color-bg);
     height: 100%;
+    max-width: 1500px;
 }
 
 /* Color para los componentes tipo titulo y otros de Ant Design */
@@ -235,4 +238,13 @@ font-size: 12px !important;
 .buscar-seccion-table1 th,
 .buscar-seccion-table1 td{
   font-size: 12px;
+}
+
+.buscar-seccion-table1 button {
+    height: 30px;
+
+}
+
+.buscar-seccion-table1 .ant-table-cell {
+    padding: 3px 6px !important;
 }

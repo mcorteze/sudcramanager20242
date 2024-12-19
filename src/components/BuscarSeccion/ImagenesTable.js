@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Table, Spin, message } from 'antd';
-
+import { Table, Spin, message, Tooltip } from 'antd';
+import { InfoCircleOutlined } from '@ant-design/icons';
 
 const ImagenesTable = ({ idSeccion }) => {
   const [data, setData] = useState([]);
@@ -45,12 +45,16 @@ const ImagenesTable = ({ idSeccion }) => {
         </a>
       ),
     },
-    
   ];
 
   return (
     <div>
-      <h2>Subida de imágenes de la sección</h2>
+      <h2>
+        Subida de imágenes de la sección{' '}
+        <Tooltip title="Una subida no figura si se subió de otra sede o el registro fue indicado con otra asignatura u otro número de sección">
+          <InfoCircleOutlined style={{ fontSize: '16px', marginLeft: '8px', color: '#1890ff' }} />
+        </Tooltip>
+      </h2>
       {loading ? (
         <Spin tip="Cargando imágenes..." />
       ) : (
@@ -59,7 +63,7 @@ const ImagenesTable = ({ idSeccion }) => {
           dataSource={data}
           columns={columns}
           rowKey="id_imagen"
-          pagination={ false }
+          pagination={false}
         />
       )}
     </div>

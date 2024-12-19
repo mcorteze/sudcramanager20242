@@ -17,6 +17,7 @@ const LecturaTable = ({ lecturaData, loading }) => {
     <div>
       <h2>Imágenes con calificación</h2>
       <Table
+        className='buscar-seccion-table1'
         columns={lecturaColumns}
         dataSource={lecturaData}
         loading={loading}

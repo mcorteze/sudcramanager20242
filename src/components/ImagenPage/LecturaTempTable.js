@@ -14,6 +14,7 @@ const LecturaTempTable = ({ lecturaTempData, loading }) => {
     <div>
       <h2>Registros en tabla Lectura Temporal</h2>
       <Table
+        className='buscar-seccion-table1'
         columns={lecturaTempColumns}
         dataSource={lecturaTempData}
         loading={loading}

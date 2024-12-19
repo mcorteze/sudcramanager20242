@@ -18,6 +18,7 @@ const ErroresTable = ({ erroresData, loading }) => {
     <div>
       <h2>Registros en tabla Errores</h2>
       <Table
+        className='buscar-seccion-table1'
         columns={erroresColumns}
         dataSource={erroresData}
         loading={loading}

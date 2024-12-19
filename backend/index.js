@@ -10,10 +10,10 @@ app.use(express.json()); // Middleware para permitir que Express entienda JSON e
 
 const pool = new Pool({
   user: 'postgres',
-  //host: '10.10.101.99',
-  //database: 'sudcra',
-  host: 'localhost',
-  database: 'sudcra_1123',
+  host: '10.10.101.99',
+  database: 'sudcra',
+  //host: 'localhost',
+  //database: 'sudcra_1123',
   password: 'fec4a5n5',
   port: 5432,
 });
