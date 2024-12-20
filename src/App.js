@@ -31,6 +31,7 @@ import DashboardPage from './pages/DashboardPage.js';
 import AccesosPage from './pages/AccesosPage.js';
 import ArchivoLeidoPage from './pages/ArchivoLeidoPage.js';
 import SharepointPage from './pages/SharepointPage.js';
+import PanelSeccionesPage from './pages/PanelSeccionesPage.js'
 
 import './App.css';
 
@@ -79,6 +80,9 @@ const App = () => {
             </Menu.Item>
             <Menu.Item key="19" icon={<TableOutlined />}>
               <Link to="/listasharepoint">SharePoint</Link>
+            </Menu.Item>
+            <Menu.Item key="20" icon={<TableOutlined />}>
+              <Link to="/panelsecciones">Panel</Link>
             </Menu.Item>
           </Menu>
         </Sider>
@@ -130,6 +134,7 @@ const App = () => {
               <Route path="/dashboard" element={<DashboardPage />} />
               <Route path="/accesos" element={<AccesosPage />} />
               <Route path="/listasharepoint" element={<SharepointPage />} />
+              <Route path="/panelsecciones" element={<PanelSeccionesPage />} />
             </Routes>
           </Content>
         </Layout>

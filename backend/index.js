@@ -693,59 +693,95 @@ app.get('/api/monitor/:programa', async (req, res) => {
   }
 });
 
-// Endpoint para obtener información de secciones por asignatura
-app.get('/api/monitor/:programa/:asignatura', async (req, res) => {
-  const { asignatura } = req.params;
+// Endpoint panelsecciones
+app.get('/api/panelsecciones', async (req, res) => {
   try {
     const query = `
-SELECT 
-    (si.id_seccion || '_' || si.id_eval::text) AS id_seccion_eval,
-    si.id_seccion,
-    si.id_eval,
-    asig.cod_asig,
-    asig.asig,
-    asig.programa,
-    asig.cod_programa,
-    e.num_prueba,
-    s.seccion,
-    sd.nombre_sede,
-    MAX(si.marca_temp_mail) AS enviado
-FROM 
-    informes_secciones si
-JOIN 
-    secciones s ON s.id_seccion = si.id_seccion
-JOIN 
-    eval e ON si.id_eval = e.id_eval
-JOIN 
-    asignaturas asig ON asig.cod_asig = s.cod_asig
-JOIN 
-    sedes sd ON s.id_sede = sd.id_sede
-WHERE
-    asig.cod_asig = $1
-GROUP BY 
-    sd.nombre_sede,
-    asig.cod_asig,
-    s.seccion,
-    e.num_prueba,
-    (si.id_seccion || '_' || si.id_eval::text), 
-    si.id_seccion, 
-    si.id_eval, 
-    asig.asig, 
-    asig.programa, 
-    asig.cod_programa
-ORDER BY 
-    sd.nombre_sede ASC,
-    asig.cod_asig ASC,
-    s.seccion ASC;
+    SELECT
+        a.programa,
+        sd.nombre_sede,
+        e.cod_asig,
+        s.seccion,
+        s.id_seccion,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 1 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_1,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 2 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_2,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 3 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_3,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 4 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_4,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 5 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_5,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 6 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_6,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 7 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_7,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 8 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_8,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 9 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_9,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 10 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_10,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 11 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_11,
+        COALESCE(MAX(CASE WHEN e.num_prueba = 12 THEN 
+            CASE 
+                WHEN ie.mail_enviado THEN 1
+                WHEN ie.mail_enviado IS NULL THEN 0
+            END END), -1) AS prueba_12
+    FROM eval e
+    JOIN secciones s ON s.cod_asig = e.cod_asig
+    JOIN sedes sd on s.id_sede = sd.id_sede
+    JOIN asignaturas a on a.cod_asig = s.cod_asig
+    LEFT JOIN informes_secciones ie ON ie.id_seccion = s.id_seccion AND ie.marca_temp_mail IS NOT NULL
+    GROUP BY a.programa, sd.nombre_sede, s.id_seccion, e.cod_asig
+    ORDER BY a.programa, sd.nombre_sede, e.cod_asig, s.seccion;
     `;
-
-    const result = await pool.query(query, [asignatura]);
+    
+    const result = await pool.query(query);
     res.json(result.rows);
   } catch (err) {
     console.error('Error en la consulta SQL:', err);
     res.status(500).json({ error: 'Error en la consulta SQL' });
   }
 });
+
+
+
 
 // Extraer notas //
 
@@ -1464,7 +1500,7 @@ app.put('/api/rehacerinformealumno', async (req, res) => {
 
     const query = `
       UPDATE calificaciones_obtenidas
-      SET informe_listo = False
+      SET informe_listo = false
       WHERE id_matricula_eval = $1
       RETURNING *;
     `;
@@ -1504,7 +1540,7 @@ app.put('/api/reenviarinformealumno', async (req, res) => {
 
     const query = `
       UPDATE informe_alumnos
-      SET mail_enviado = true
+      SET mail_enviado = false
       WHERE id_matricula_eval = $1
       RETURNING *;
     `;
@@ -1533,6 +1569,45 @@ app.put('/api/reenviarinformealumno', async (req, res) => {
   }
 });
 
+app.put('/api/reenviar-informe-seccion', async (req, res) => {
+  const { idInformeSeccion } = req.body; // Recibimos el id_informeseccion
+  console.log("idInformeSeccion recibido:", idInformeSeccion);
+
+  const client = await pool.connect();
+
+  try {
+    await client.query('BEGIN'); // Iniciamos la transacción
+
+    const query = `
+      UPDATE informes_secciones
+      SET mail_enviado = false
+      WHERE id_informeseccion = $1
+      RETURNING *;
+    `;
+
+    const result = await client.query(query, [idInformeSeccion]);
+
+    console.log("Resultado de la consulta:", result.rows);
+
+    if (result.rowCount === 0) {
+      console.log("No se encontró ningún registro para actualizar.");
+      throw new Error('No se encontró ningún informe de sección para actualizar.');
+    }
+
+    await client.query('COMMIT'); // Confirmamos la transacción
+
+    res.status(200).json({
+      message: 'Campo mail_enviado actualizado correctamente a false.',
+      updatedRows: result.rows, // Retorna el registro actualizado
+    });
+  } catch (err) {
+    await client.query('ROLLBACK'); // Deshacemos cambios si ocurre un error
+    console.error('Error en el servidor:', err.message);
+    res.status(500).json({ error: err.message });
+  } finally {
+    client.release(); // Liberamos la conexión
+  }
+});
 
 
 app.get('/api/listado_calificaciones_obtenidas', async (req, res) => { 
@@ -1561,6 +1636,40 @@ app.get('/api/listado_calificaciones_obtenidas', async (req, res) => {
     `);
 
     res.json(result.rows); // Enviar los resultados como respuesta
+  } catch (err) {
+    console.error('Error en la consulta SQL:', err);
+    res.status(500).json({ error: 'Error en la consulta SQL' });
+  }
+});
+
+// Endpoint ultimo id_archivoleido de imagenes por programa
+app.get('/api/ultimo_idarchivoleidoimagen', async (req, res) => {
+  try {
+    const query = `
+      WITH UltimosArchivoleidos AS (
+          SELECT
+              me.id_archivoleido,
+              asig.cod_programa,
+              ROW_NUMBER() OVER (PARTITION BY asig.cod_programa ORDER BY me.id_archivoleido DESC) AS rn
+          FROM matricula_eval me
+          JOIN eval e ON e.id_eval = me.id_eval
+          JOIN asignaturas asig ON asig.cod_asig = e.cod_asig
+          WHERE me.imagen <> ''
+            AND asig.cod_programa IN ('mat', 'len', 'ing', 'emp', 'fyc', 'eti')
+      )
+      SELECT
+          MAX(CASE WHEN cod_programa = 'mat' THEN id_archivoleido END) AS mat,
+          MAX(CASE WHEN cod_programa = 'len' THEN id_archivoleido END) AS len,
+          MAX(CASE WHEN cod_programa = 'ing' THEN id_archivoleido END) AS ing,
+          MAX(CASE WHEN cod_programa = 'emp' THEN id_archivoleido END) AS emp,
+          MAX(CASE WHEN cod_programa = 'fyc' THEN id_archivoleido END) AS fyc,
+          MAX(CASE WHEN cod_programa = 'eti' THEN id_archivoleido END) AS eti
+      FROM UltimosArchivoleidos
+      WHERE rn = 1;
+    `;
+
+    const [result] = await pool.query(query); // Ejecuta la consulta con await
+    res.json(result[0]); // Devuelve el primer (y único) resultado como JSON
   } catch (err) {
     console.error('Error en la consulta SQL:', err);
     res.status(500).json({ error: 'Error en la consulta SQL' });

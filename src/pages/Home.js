@@ -6,6 +6,7 @@ import { ResponsiveContainer } from 'recharts';
 
 import UltimoProcesoImagen from '../components/Home/UltimoProcesoImagen';
 import UltimoProcesoPlanilla from '../components/Home/UltimoProcesoPlanilla';
+import UltimoIdArchivoleidoImagen from '../components/Home/UltimoIdArchivoleidoImagen';
 
 import './home.css';
 
@@ -228,6 +229,7 @@ export default function Home() {
 
       <UltimoProcesoImagen />
       <UltimoProcesoPlanilla />
+      <UltimoIdArchivoleidoImagen />
       
       <h3>Resumen de Evaluaciones por Día (últimos 14 días)</h3>
       <ResponsiveContainer width="100%" height={400}>
